@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif, system-ui;
+  background: #fde6ec;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+}
+
+.app-title {
+  font-family: 'Indie Flower';
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: #301e1e;
+}
+
+.app {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Форма */
+.task-form {
+  font-family: sans-serif;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.task-form__input {
+  flex: 1 1 200px;
+  padding: 10px 12px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.task-form__input:focus, .task-form__input:hover {
+  border-color: #efaabf;
+}
+
+.task-form__date {
+  padding: 10px 12px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* календарь не наследовал шрифты от body*/
+
+.task-form__date:hover{
+  border-color: #efaabf;
+}
+
+.task-form__date,
+.task__edit-date {
+  font-family: inherit;
+}
+
+/* WebKit/Blink: внутренние части date-инпута */
+.task-form__date::-webkit-datetime-edit,
+.task__edit-date::-webkit-datetime-edit {
+  font-family: inherit;
+}
+
+.task-form__date::-webkit-datetime-edit-fields-wrapper,
+.task__edit-date::-webkit-datetime-edit-fields-wrapper {
+  font-family: inherit;
+}
+
+/* Иконка календаря */
+.task-form__date::-webkit-calendar-picker-indicator,
+.task__edit-date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+.task-form__submit {
+  padding: 10px 18px;
+  background:  #efaabf;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.task-form__submit:hover {
+  background:  #c88196;
+}
+
+/* Список */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* Карточка задачи */
+.task {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: grab;
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+.task--dragging {
+  opacity: 0.4;
+}
+
+.task--over {
+  outline: 2px solid  #efaabf;
+  outline-offset: -2px;
+}
+
+.task__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.task__text {
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+.task__date {
+  font-size: 0.8rem;
+  color: #8a8f98;
+}
+
+.task__delete {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f2f4;
+  color: #8a8f98;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.task__delete:hover {
+  background:  #efaabf;
+  color:  #fff;
+}
+
+.task--done .task__text {
+  text-decoration: line-through;
+  color: #8a8f98;
+}
+
+.task--done .task__date {
+  opacity: 0.6;
+}
+
+.task--done {
+  background: #fafafa;
+}
+
+.task__done {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color:  #efaabf;
+}
+
+.task__edit {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f2f4;
+  color: #8a8f98;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.task__edit:hover {
+  background:  #efaabf;
+  color:  #fff;
+}
+
+.task__edit-form {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.task__edit-input {
+  flex: 1 1 160px;
+  padding: 8px 10px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  min-width: 0;
+}
+
+.task__edit-input:focus {
+  border-color:  #efaabf;
+}
+
+.task__edit-date {
+  padding: 8px 10px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.task__save,
+.task__cancel {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.task__save {
+  background:  #efaabf;
+  color: #fff;
+}
+
+.task__save:hover {
+  background:  #c88196;
+}
+
+.task__cancel {
+  background: #f1f2f4;
+  color: #8a8f98;
+}
+
+.task__cancel:hover {
+  background:  #efaabf;
+  color:  #fff;
+}
+
+.task-form__sort {
+  padding: 10px 18px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  min-width: 210px;      
+  text-align: center;    
+}
+
+.task-form__sort:hover {
+  border-color: #efaabf;
+}
+
+
+.task-form__filter {
+  padding: 10px 12px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.task-form__filter:focus, .task-form__filter:hover {
+  border-color:  #efaabf;
+}
+
+.task-form__search {
+  flex: 1 1 160px;
+  padding: 10px 12px;
+  border: 1px solid #d0d3d9;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.task-form__search:focus, .task-form__search:hover {
+  border-color:  #efaabf;
+}
+
+/* Адаптив */
+@media (max-width: 480px) {
+  .task-form {
+    flex-direction: column;
+  }
+  .task-form > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
